@@ -19,7 +19,7 @@ set('writable_dirs', []);
 server('ECS Dev', 'ecsdev')
 // ->user('username')
 	->identityFile()
-	->set('deploy_path', '/var/www/html/default/deployer-tools');
+	->set('deploy_path', '/var/www/html/default/oaktree-test');
 
 // Tasks
 
