@@ -1,0 +1,53 @@
+.page { width: 1030px !important; }
+.span12 {
+    margin: 0 !important;
+    width: 1030px !important;
+}
+
+.bottom-banner a {
+float: left;
+margin-left: 5px;
+}
+
+.nav_bottom .clickable {
+float: left;
+}
+
+.main-container {
+clear: both;
+}	
+
+div.link_box div.menu {
+width: 200px !important;
+}
+
+.getintouch {
+width: 215px !important;
+}
+
+.menu2 {
+width: 200px !important;
+}
+
+.nav-container {
+z-index: 9999 !important;
+}
+
+#nav li ul {
+z-index: 9999 !important;
+
+}
+
+#nav a {
+padding: 8px 12px !important;
+}
+
+#tabcontent, .homeslider, .main, .col-main, .main-container {
+z-index: 9 !important;
+position: relative;
+}
+
+.sidebar {
+width: 150px !important;
+}
+

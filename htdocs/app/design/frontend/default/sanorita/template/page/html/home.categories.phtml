@@ -1,0 +1,29 @@
+<div class="featured-cat-block">
+	<div class="featured-cat-content">
+                <?php echo $this->getChildHtml('categories'); ?>
+				<br style="clear:both">
+
+		<script type="text/javascript">
+		<!--
+		//document.observe("dom:loaded", function() {
+		window.onload = function() {
+			var count = 0;
+			var maxHeight = new Array();
+			$$('.featured-cat').each(function(item){
+				if ( maxHeight[Math.floor(count/4)] == undefined ) maxHeight[Math.floor(count/4)] = 0;
+				if ( item.getHeight() > maxHeight[Math.floor(count/4)] )
+					maxHeight[Math.floor(count/4)] = item.getHeight();
+				count++;
+			});
+
+			count = 0;
+        		$$('.featured-cat').each(function(item){
+                		item.setStyle({height:maxHeight[Math.floor(count/4)] + 'px'});
+                		count++;
+        		});
+		};
+		-->
+		</script>
+
+	</div>
+</div>

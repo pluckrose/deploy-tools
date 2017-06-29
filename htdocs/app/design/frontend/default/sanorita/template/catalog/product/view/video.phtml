@@ -1,0 +1,80 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_modern
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if ($_product->Video): ?>
+<div class="box-collateral box-video">
+ <?php echo $_product->Video; ?>
+</div>
+<?php else: ?>
+	<?php echo $this->__('Sorry No Video Available')?>
+<?php endif ?>
+
+<script>// By Chris Coyier & tweaked by Mathias Bynens
+
+jQuery(function() {
+
+	// Find all YouTube videos
+	var jQueryallVideos = jQuery("iframe[src^='http://www.youtube.com']"),
+
+	    // The element that is fluid width
+	    jQueryfluidEl = jQuery("#product_tabs_video_contents");
+
+	// Figure out and save aspect ratio for each video
+	jQueryallVideos.each(function() {
+
+		jQuery(this)
+			.data('aspectRatio', this.height / this.width)
+			
+			// and remove the hard coded width/height
+			.removeAttr('height')
+			.removeAttr('width');
+
+	});
+
+	// When the window is resized
+	// (You'll probably want to debounce this)
+	jQuery(window).resize(function() {
+
+		var newWidth = jQueryfluidEl.width();
+		
+		// Resize all videos according to their own aspect ratio
+		jQueryallVideos.each(function() {
+
+			var jQueryel = jQuery(this);
+			jQueryel
+				.width(newWidth)
+				.height(newWidth * jQueryel.data('aspectRatio'));
+
+		});
+
+	// Kick off one resize to fix all videos on page load
+	}).resize();
+
+});</script>

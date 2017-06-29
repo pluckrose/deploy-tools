@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ECS_IntegrationUtils>
+            <active>true</active>
+            <codePool>local</codePool>
+        </ECS_IntegrationUtils>
+    </modules>
+</config>

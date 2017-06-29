@@ -1,0 +1,53 @@
+/*juno style*/
+
+.product-ad {position: relative;float: left;height: 103px;width: 100%;}
+
+.product-ad .product-newsletter-box {}
+.product-ad .product-newsletter-box .form-subscribe {height: 47px;width: 414px;position: absolute;top: 29px;right: 50px;margin: 0;background: #fff;}
+.product-ad .product-newsletter-box .form-subscribe input {border: none;
+	box-shadow: none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	-o-box-shadow:none;
+	float: left;
+	font-family: "Futura","OpenSans",arial,sans-serif;margin: 4px 0 0 10px;font-size: 14px;color: #656565;width: 60%;font-weight: 300;
+}
+.product-ad .product-newsletter-box .form-subscribe input:focus {background: none;}
+.product-ad .product-newsletter-box .form-subscribe button.button {float: right;height: 38px;margin: 5px;}
+.product-ad .product-newsletter-box .form-subscribe button.button:hover span {color: #fff}
+
+.product-ad .product-newsletter-box .form-subscribe button.button span {background: #D23554;font-family: "OpenSans";letter-spacing: 1px;font-size: 17px;font-weight:300;
+	/*height: 38px;*/
+}
+.product-ad .text {
+	top: 9px;left: 80px;background: url(../images/save-5-next-order.jpg) 0 0 no-repeat;width: 631px;height: 85px;display: block;text-indent: -9999px;font-size: 0;position: absolute;
+	font-family: "Futura","OpenSans",arial,sans-serif;
+}
+
+.product-ad .product-newsletter-box .form-subscribe button.button span {background: #AC2B45;font-family: "OpenSans";letter-spacing: 1px;font-size: 17px;font-weight:300;
+}
+.product-ad .text {
+	top: 9px;left: 80px;background: url(../images/save-5-next-order.jpg) 0 0 no-repeat;width: 631px;height: 85px;display: block;text-indent: -9999px;font-size: 0;position: absolute;
+}
+.product-ad .text strong {font-family: "OpenSans-Bold";}
+
+
+.widebanner-product {clear: both; width: 100%;}
+.widebanner-product img {height: auto !important;}
+
+
+.widebanner img.promo1 {
+	margin:0 4.5% 0 0.83%; /*10/1200*/
+	width:41.25%; /*495/1200*/
+}
+.widebanner img.promo2 {
+	width:25.5%; /*306/1200*/
+}
+.widebanner img.promo3 {
+	width:21.33%; /*256/1200*/
+}
+.product-social-content ul li{float:left; margin-right:10px; margin-top:10px;}
+/*.product-social-content ul li.pinterest{ margin-left:-30px;}*/
+.product-social-content ul li.email{ text-transform:uppercase; font:11px/1.55 "OpenSans","Times New Roman",Times,serif;background:url("../images/social-icon-brandnew.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0); padding-left:25px;}
+.product-social-content ul li.email a{ text-decoration:none;}
+

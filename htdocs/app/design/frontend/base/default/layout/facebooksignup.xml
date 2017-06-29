@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<layout>
+    <facebook_frame_form>
+	    <reference name="root">
+			<action method="setTemplate"><template>page/empty.phtml</template></action>  
+	    </reference>
+        <reference name="content">
+            <block type="facebook/facebook" name="facebookframe" as="facebookframe" template="facebook/form.phtml"/>
+        </reference>
+    </facebook_frame_form>
+    
+    <facebook_frame_likeus>
+    	<reference name="root">
+			<action method="setTemplate"><template>page/empty.phtml</template></action>  
+	    </reference>
+        <reference name="content">
+            <block type="facebook/facebook" name="facebookframe" as="facebookframe" template="facebook/likeus.phtml"/>
+        </reference>
+    </facebook_frame_likeus>
+    
+    <facebook_frame_thankyou>
+    	<reference name="root">
+			<action method="setTemplate"><template>page/empty.phtml</template></action>  
+	    </reference>
+        <reference name="content">
+            <block type="facebook/facebook" name="facebookframe" as="facebookframe" template="facebook/thankyou.phtml"/>
+        </reference>
+    </facebook_frame_thankyou>
+</layout>

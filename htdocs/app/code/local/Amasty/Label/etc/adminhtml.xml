@@ -1,0 +1,64 @@
+<?xml version="1.0"?> 
+<config>
+    <events>
+        <catalog_product_save_after>
+            <observers>
+                <amlabel>
+                    <class>amlabel/observer</class>
+                    <method>applyLabels</method>
+                </amlabel>
+            </observers>
+        </catalog_product_save_after>
+    </events>
+
+	<menu>
+	    <catalog>
+            <children>
+                <amlabel translate="title" module="amlabel">
+                    <title>Product Labels</title>
+                    <sort_order>800</sort_order>
+                    <action>amlabel/adminhtml_label</action>
+                </amlabel>
+            </children>
+        </catalog>
+	</menu>     
+
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <amlabel>
+                                <title>Product Labels</title>
+                            </amlabel>
+                        </children>
+                    </catalog>    
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amlabel translate="title" module="amlabel">
+                                        <title>Product Labels</title>
+                                    </amlabel>
+                                </children>
+                            </config>
+                        </children>
+                    </system>                     
+                 </children>
+            </admin> 
+		</resources>
+	</acl>
+    <translate>
+        <modules>
+            <Amasty_Label>
+                <files>
+                    <default>Amasty_Label.csv</default>
+                </files>
+            </Amasty_Label>
+        </modules>
+    </translate>
+</config> 

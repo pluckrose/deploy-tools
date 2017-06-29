@@ -1,0 +1,11 @@
+<?php if ($posts = $this->getRecent()): ?>
+    <div class="span3 blog">
+        <h3><?php echo Mage::helper('blog')->__('Latest from the Blog'); ?></h3>
+        <ul>
+            <?php foreach ($posts as $post): ?>
+                <li><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></br><?php echo $post->getShortContent(); ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <p class="blog-link"><a href="http://www.oaktreegardencentre.com/blog">View our blog</a></p>
+    </div>
+<?php endif; ?>

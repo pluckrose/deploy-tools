@@ -1,0 +1,290 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+  <div class="product-view">
+    <div class="product-essential row-fluid">
+      <div class="product-img-box span6"> <?php echo $this->getChildHtml('media') ?>
+          <!-- Get Product Banner Attribute and Output-->
+          <?php $_staticBlock = $_product->getProductBanner(); ?>
+          <?php if( $this->getLayout()->createBlock('cms/block')->setBlockId($_staticBlock)->toHtml() !== '' ): ?>
+              <?php $_productBanner = $this->getLayout()->createBlock('cms/block')->setBlockId($_staticBlock); ?>
+              <div class="span12 why">
+                  <?php echo $_productBanner->toHtml(); ?>
+              </div>
+          <?php endif ;?>
+          <?php echo $this->getChildHtml('info_tabs') ?>
+      </div>
+      <div class="span6 product-shop">
+        <!--Prev/Next Code Start-->
+        <?php
+
+      $_helper = $this->helper('catalog/output');
+      $_product = $this->getProduct();
+      $prev_url = $next_url = $url = $_product->getProductUrl();
+      if ($this->helper('catalog/data')->getCategory()) {
+        $category = $this->helper('catalog/data')->getCategory();
+      } else {
+        $_ccats = $this->helper('catalog/data')->getProduct()->getCategoryIds();
+        $category = Mage::getModel('catalog/category')->load($_ccats[0]);
+      }
+
+      $children = $category->getProductCollection();
+
+      $_count = is_array($children) ? count($children) : $children->count();
+
+      if ($_count) {
+
+        foreach ($children as $product) {
+
+          $plist[] = $product->getId();
+
+        }
+
+/**
+* Determine the previous/next link and link to current category
+*/
+
+$current_pid  = $this->helper('catalog/data')->getProduct()->getId();
+
+$curpos   = array_search($current_pid, $plist);
+
+// get link for prev product
+
+$previd   = isset($plist[$curpos+1])? $plist[$curpos+1] : $current_pid;
+
+$product  = Mage::getModel('catalog/product')->load($previd);
+
+$prevpos  = $curpos;
+
+while (!$product->isVisibleInCatalog()) {
+
+  $prevpos += 1;
+
+  $nextid   = isset($plist[$prevpos])? $plist[$prevpos] : $current_pid;
+
+  $product  = Mage::getModel('catalog/product')->load($nextid);
+
+}
+
+$prev_url = $product->getProductUrl();
+
+// get link for next product
+
+$nextid   = isset($plist[$curpos-1])? $plist[$curpos-1] : $current_pid;
+
+$product  = Mage::getModel('catalog/product')->load($nextid);
+
+$nextpos  = $curpos;
+
+while (!$product->isVisibleInCatalog()) {
+
+  $nextpos -= 1;
+
+  $nextid   = isset($plist[$nextpos])? $plist[$nextpos] : $current_pid;
+
+  $product  = Mage::getModel('catalog/product')->load($nextid);
+}
+
+$next_url = $product->getProductUrl();
+
+}
+
+?>
+        <!--Prev/Next Code End-->
+        <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="product-shop span6">
+          <div class="product_left">
+            <div class="product-name">
+                <div class="no-display">
+                    <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                    <input type="hidden" name="related_product" id="related-products-field_1" value="" />
+                </div>
+
+                <?php /*<!-- TODO: Temporarily hiding --> */; ?>
+                <!-- TrustBox widget - Mini - A -->
+                <!--                <div class="tp_-_category-badge">-->
+                <!--                    <div class="trustpilot-widget" data-locale="en-US" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="515d50d400006400052559e5" data-style-height="150px" data-style-width="100%" data-theme="light" data-group="a" data-stars="1,2,3,4,5">-->
+                <!--                        <a href="https://www.trustpilot.com/review/oaktreegardencentre.com" target="_blank">Trustpilot</a>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!-- End TrustBox widget -->
+                
+                <?php
+      $bundleClass = "";
+      if($_product->getTypeId() === Mage_Catalog_Model_Product_Type::TYPE_BUNDLE && $_product->getBundleDisplayPrice()){
+        $bundleClass = "is-bundle-has-display-price";
+      }
+      ?>
+              <div class="stock_box <?php echo $bundleClass?>">
+                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+<!--               <p class="availability out-of-stock"> --><?php //// Custom Stock Status ?>
+<!--                    	--><?php //echo Mage::helper('customstockstatus')->getListStatus($_product->getId()); ?>
+<!--                    --><?php //// End Custom Stock Status ?><!-- </p>-->
+                <?php echo $this->getChildHtml('alert_urls') ?> <?php echo $this->getChildHtml('product_type_data') ?>
+                <?php if($_product->getTypeId() === Mage_Catalog_Model_Product_Type::TYPE_BUNDLE && $_product->getBundleDisplayPrice()): ?>
+                <?php $bundleDisplayPrice     = $_product->getBundleDisplayPrice(); ?>
+                <?php if($_product->getBundleDisplaySalePrice() > 0): ?>
+                <?php $bundleDisplaySalePrice = $_product->getBundleDisplaySalePrice(); ?>
+                <div class="price-box price-box-bundle">
+                  <p class="old-price"> <span class="price"><?php echo Mage::helper('core')->currency($bundleDisplayPrice, true, false); ?></span> </p>
+                  <p class="special-price"> <span class="price"><?php echo Mage::helper('core')->currency($bundleDisplaySalePrice, true, false); ?></span> </p>
+                </div>
+                <?php else: ?>
+                <div class="price-box price-box-bundle"> <span class="regular-price"> <span class="price"><?php echo Mage::helper('core')->currency($bundleDisplayPrice, true, false); ?></span> </span> </div>
+                <?php endif; ?>
+                <?php endif; ?>
+              </div>
+              <?php echo $this->getTierPriceHtml()?>
+
+              <div class="product-social-content" style="padding-bottom:40px;">
+                <ul class="share-box">
+                    <li class="email">
+                        <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" title="" target="_blank">E-mail a friend</a>
+                    </li>
+                    <li class="fb-o">
+                        <fb:like href="<?php echo $_product->getProductUrl(); ?>" send="false" layout="button_count" width="450" show_faces="true"></fb:like>
+                    </li>
+                    <li class="tw">
+                        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </li>
+                    <li class="pinterest">
+                        <a href="http://pinterest.com/pin/create/button/?url=<?php echo urlencode($_product->getProductUrl()); ?>&media=<?php echo urlencode($this->helper('catalog/image')->init($_product, 'image')->resize(556)); ?>&description=<?php echo $this->htmlEscape($_product->getName()); ?>" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a>
+                        <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+                    </li>
+                </ul>
+              </div>
+
+              <?php if($_product->getAttributeText('in_store_only') == "Yes"): ?>
+              <div class="in-store-message">
+                <p>To purchase this item please call 01344 890 667 or visit the garden centre</p>
+              </div>
+              <?php endif; ?>
+              <?php if($_product->getData('brands')){echo '<span class="brands"><h4>brands:</h4>'. $_product->getAttributeText('brands').'</span>';  }?>
+            </div>
+            <div class="pro-left">
+              <!-- <?php if ($_product->getShortDescription()):?>
+
+          <div class="short-description">
+
+            <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+
+          </div>
+
+        <?php endif;?>-->
+              <?php echo $this->getLayout()->createBlock('manufacturer/manufacturer')->setProduct($_product)->setTemplate('manufacturer/product_manufacturer.phtml')->toHtml(); ?>
+              <div class="add_to_cart">
+                <?php if (!$this->hasOptions()):?>
+                <div class="add-to-box">
+                  <?php if($_product->isSaleable() and $_product->getAttributeText('in_store_only') != "Yes"): ?>
+                  <?php echo $this->getChildHtml('addtocart') ?>
+                  <?php endif; ?>
+                </div>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('other');?>
+                <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                <?php endif;?>
+                <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                <?php endif;?>
+              </div>
+              <div class="review"> <?php echo $this->getReviewsSummaryHtml($_product, false, true)?> </div>
+              <div class="addthis"> <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('addthis')->toHtml() ?> </div>
+            </div>
+          </div>
+        </div>
+        <div class="finance">
+            <?php if(Mage::helper('paybyfinance')->isProductEligible($_product)): ?>
+                <?php echo $this->getChildHtml('paybyfinance.selector') ?>
+            <?php endif; ?>
+        </div>
+        <?php echo $this->getLayout()->getBlock('catalog.product.related')->toHtml()?>
+        <div class="nosto_element" id="nosto-product-page"></div></div>
+  </div>
+  <div class="row-fluid"> </div>
+</form>
+
+
+
+<!--
+<div class="product-collateral">  <?php echo $this->getChildHtml('product_additional_data') ?> </div>
+-->
+<script type="text/javascript">
+    //<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+      if (this.validator.validate()) {
+        var form = this.form;
+        var oldUrl = form.action;
+
+        if (url) {
+         form.action = url;
+       }
+       var e = null;
+       try {
+        this.form.submit();
+      } catch (e) {
+      }
+      this.form.action = oldUrl;
+      if (e) {
+        throw e;
+      }
+
+      if (button && button != 'undefined') {
+        button.disabled = true;
+      }
+    }
+  }.bind(productAddToCartForm);
+
+  productAddToCartForm.submitLight = function(button, url){
+    if(this.validator) {
+      var nv = Validation.methods;
+      delete Validation.methods['required-entry'];
+      delete Validation.methods['validate-one-required'];
+      delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                  if (methodName.match(/^validate-datetime-.*/i)) {
+                    delete Validation.methods[methodName];
+                  }
+                }
+
+                if (this.validator.validate()) {
+                  if (url) {
+                    this.form.action = url;
+                  }
+                  this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+              }
+            }.bind(productAddToCartForm);
+    //]]>
+    </script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function(){
+
+     jQuery("a[rel=example_group]").fancybox({
+
+      'transitionIn'		: 'none',
+
+      'transitionOut'		: 'none',
+
+      'titlePosition' 	: 'over',
+
+      'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+
+       return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+
+     }
+
+   });
+
+   });
+
+    </script>

@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <integration>
+                    <title>Integration</title>
+                    <sort_order>25</sort_order>
+                    <children>
+                        <products_to_action>
+                            <title>Recently Imported</title>
+                            <sort_order>10</sort_order>
+                            <action>integrationutils/adminhtml_recent</action>
+                        </products_to_action>
+                    </children>
+                </integration>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <integration translate="title" module="integrationutils">
+                                <title>Integration</title>
+                                <sort_order>25</sort_order>
+                                <children>
+                                    <products_to_action translate="title">
+                                        <title>Recently Imported</title>
+                                    </products_to_action>
+                                </children>
+                            </integration>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ECS_OaktreePdf>
+            <version>0.1.0</version>
+        </ECS_OaktreePdf>
+    </modules>
+
+    <global>
+        <models>
+            <sales>
+                <rewrite>
+                    <order_pdf_invoice>ECS_OaktreePdf_Model_Order_Pdf_Invoice</order_pdf_invoice>
+                    <order_pdf_shipment>ECS_OaktreePdf_Model_Order_Pdf_Shipment</order_pdf_shipment>
+                </rewrite>
+            </sales>
+        </models>
+    </global>
+</config>

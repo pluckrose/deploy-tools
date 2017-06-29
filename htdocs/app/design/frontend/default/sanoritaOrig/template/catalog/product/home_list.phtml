@@ -1,0 +1,87 @@
+<?php
+	$cObj = Mage::getModel('catalog/category')->load(106);	
+	
+	$visibility = array(
+            Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,
+            Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG
+        );
+	$productObj = $cObj->getProductCollection()->addAttributeToFilter('visibility', $visibility)->getData();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(count($productObj)<=0): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<h1 class="line_heading"><span><?php echo $this->__('Featured Products')?></span></h1>
+<div id="mix_container" class="mix_container span12">
+  <div class="mix_wrapper">
+  <div class="mix_inner">
+    <ul class="featured da-thumbs" id="da-thumbs">
+      <?php $i=1;foreach($productObj as $_productData): ?>
+      <?php $_product = Mage::getModel('catalog/product')->load($_productData['entity_id']); ?>
+      <li class="item">
+       <div class="badge">			
+            			<?php if($_product->getData('new')){echo '<span class="new">'. $_product->getAttributeText('new').'</span>';  }?>
+            			<?php if($_product->getData('sale')){echo '<span class="sale">'. $_product->getAttributeText('sale').'</span>';  }?>
+            		</div>
+          <?php $i++; ?>
+          <a href="<?php echo $_product->getProductUrl() ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(220,215); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+          <strong class="ic_caption">
+            <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+            <div class="actions">
+            	<div class="iconPan">
+                
+				  <?php if($_product->isSaleable()): ?>
+                  <a title="<?php echo $this->__('Quick View')?>" href='<?php echo $this->getUrl('ajax/index/options',array('product_id'=>$_product->getId()));?>' class='fancybox quickllook zoom' id='fancybox<?php echo $_product->getId()?>'>Quick look</a>
+                  <?php else: ?>
+                  <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                  <?php endif; ?>
+                 
+                  	<a title="<?php echo $this->__('See product')?>" class="link" href="<?php echo $_product->getProductUrl() ?>">See product</a>
+                  
+                  </div>
+                  <?php echo $this->getPriceHtml($_product, true, '-right') ?> 
+              </div>
+        </strong>
+      </li>
+      <?php endforeach ?>
+    </ul>
+  </div>  
+    <div class="clearfix"></div>
+	<a id="prev4" class="jcarousel-prev" href="#">&lt;</a>
+	<a id="next4" class="jcarousel-next" href="#">&gt;</a>
+  </div>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+     jQuery('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+         jQuery('body').removeClass('loading');
+        }
+      });
+	
+//	Responsive layout, resizing the items
+				jQuery('.featured').carouFredSel({
+					responsive: true,
+					auto:false,
+					prev: '#prev4',
+					next: '#next4',
+					width: '100%',
+					scroll: 2,
+					items: {
+						width:220,
+						visible: {
+							min: 1,
+							max: 6
+						}
+					}
+				});
+	
+	});
+	jQuery(function() {
+				jQuery('#da-thumbs > li').hoverdir();
+
+			});
+	
+</script>

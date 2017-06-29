@@ -1,0 +1,93 @@
+<?php
+/**
+ *
+ **/
+?>
+<?php if ($banners = $this->getBanners()): ?>
+	<?php if (count($banners) > 0): ?>
+		<div id="<?php echo $this->getCarouselId() ?>" class="jbanners">
+			<div id="left" class="previous_button"></div>
+			<div class="container">
+				<ul>
+					<?php $i = 0; ?>
+					<?php foreach($banners as $banner): ?>
+						<li<?php if ($banner->hasMap()): ?> class="map"<?php endif; ?> id="banner_<?php echo $i+1; ?>">
+							<?php if ($coords = $banner->getCoords()): ?>
+								<img src="<?php echo $banner->getImageUrl() ?>" alt="<?php echo $banner->getTitle() ?>"/>					
+								<?php foreach($coords as $coordId => $coord): ?>
+										<?php if($coord['width']+$coord['height'] == 0){ ?>
+											<a href="<?php echo $coord['url'] ?>" class="circle" <?php if (isset($coord['title'])): ?> title="<?php echo $coord['title'] ?>"<?php endif; ?> style="height: 18px; left:<?php echo $coord['left'] ?>px; top:<?php echo $coord['top'] ?>px; width: 18px;">
+												<?php echo (isset($coord['title']) && trim($coord['title'])) ? trim($coord['title']) : '&nbsp;' ?>
+											</a>
+										<?php } else { ?>
+											<a href="<?php echo $coord['url'] ?>" class="shape" <?php if (isset($coord['title'])): ?> title="<?php echo $coord['title'] ?>"<?php endif; ?> style="height: <?php echo $coord['height'] ?>px; left:<?php echo $coord['left'] ?>px; top:<?php echo $coord['top'] ?>px; width: <?php echo $coord['width'] ?>px;">
+												<?php echo (isset($coord['title']) && trim($coord['title'])) ? trim($coord['title']) : '&nbsp;' ?>
+											</a>										
+										<?php } ?>
+								<?php endforeach; ?>
+							<?php else: ?>
+								<?php echo $banner->getHtml() ?>
+							<?php endif; ?>
+						</li>
+						<?php $i++; ?>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+			<div id="right" class="next_button"></div>
+		</div>
+		<?php if (count($banners) > 1): ?>
+			<script type="text/javascript">
+				//<![CDATA[
+				var tBan = <?php echo count($banners); ?>;
+				var cBan = 1;
+				var intervalId = 0;
+					
+				function doFade(cBan,nBan){
+					cBanName = "#banner_"+cBan;
+					nBanName = "#banner_"+nBan;
+					jQuery(cBanName).css( 'z-index', 4 ).fadeOut(1800);
+					jQuery(nBanName).css( 'z-index', 5 ).fadeOut(0).fadeIn(1800);
+				}
+				function doFadeRight()
+				{
+					nBan = (cBan+1);
+					if(nBan == (tBan+1)){ nBan = 1; }
+					doFade(cBan,nBan);
+					cBan = nBan;
+				}
+				jQuery(document).ready(function(){
+					for( bannerLoop = 2; bannerLoop <= tBan; ++bannerLoop )
+					{
+						jQuery( '#banner_' + bannerLoop ).fadeOut( 0 );	
+					}
+					jQuery('#left').click(function(){
+						nBan = (cBan-1);
+						if(nBan == 0){ nBan = tBan; }
+						doFade(cBan,nBan);
+						cBan = nBan;
+						if( intervalId )
+						{
+							clearInterval( intervalId );
+							intervalId = 0;
+						}
+					});
+					jQuery('#right').click( function(){
+						doFadeRight();
+						if( intervalId )
+						{
+							clearInterval( intervalId );
+							intervalId = 0;
+						}
+					});
+					intervalId = setInterval( "doFadeRight()", 6000 );
+				});
+				
+				<?php /**
+				Event.observe(window, "load", function() {
+					hCarousel = new UI.Carousel("<?php echo $this->getCarouselId() ?>");
+				});**/ ?>
+				//]]>
+			</script>
+		<?php endif; ?>
+	<?php endif; ?>
+<?php endif; ?>

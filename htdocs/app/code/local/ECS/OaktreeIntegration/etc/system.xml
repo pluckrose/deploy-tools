@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ecs_modules translate="label" module="oaktreeintegration">
+            <label>ECS Modules</label>
+            <sort_order>999</sort_order>
+        </ecs_modules>
+    </tabs>
+    <sections>
+        <oaktreeintegration translate="label" module="oaktreeintegration">
+            <label>Oaktree Integration</label>
+            <tab>ecs_modules</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <auth translate="label">
+                    <label>RMS Webservice Authentication</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <username>
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </username>
+                        <password>
+                            <label>Password</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </password>
+                    </fields>
+                </auth>
+
+                <feeds>
+                    <label>Feeds Enabled</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <orders>
+                            <label>Orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </orders>
+                    </fields>
+                </feeds>
+
+                <items translate="label">
+                    <label>RMS New and Changed Items</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <serviceurl>
+                            <label>WebService URL</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-url</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </serviceurl>
+                        <fetchlimit>
+                            <label>Number to Fetch</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </fetchlimit>
+                        <importcategory>
+                            <label>Import Category</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>oaktreeintegration/admin_category</source_model>
+                            <validate>validate-digits</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </importcategory>
+                        <skufield>
+                            <label>SKU field</label>
+                            <comment>Name of the RMS field that should map to SKU</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </skufield>
+                        <allow_all_manufacturers>
+                            <label>Allowed All Manufacturers?</label>
+                            <comment><![CDATA[Switch on for all brands]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <validate>validate-digits</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_all_manufacturers>
+                        <allowed_manufacturers>
+                            <label>Allowed Manufacturers</label>
+                            <comment><![CDATA[Which brands should get updates]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>oaktreeintegration/admin_manufacturers</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allowed_manufacturers>
+                    </fields>
+                </items>
+                <field_mapping translate="labe;">
+                    <label>RMS Field Mapping</label>
+                    <comment><![CDATA[Mapping the Magento attributes to the names of the RMS fields. Altering these is <strong><span style="color: red;">not advised</span></strong>.]]></comment>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <sku>
+                            <label>SKU</label>
+                            <comment><![CDATA[<strong>This can cause serious problems if altered incorrectly</strong>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sku>
+                        <price>
+                            <label>Price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </price>
+                        <special_price>
+                            <label>Special Price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </special_price>
+                        <msrp>
+                            <label>MSRP</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </msrp>
+                    </fields>
+                </field_mapping>
+            </groups>
+        </oaktreeintegration>
+    </sections>
+</config>
+

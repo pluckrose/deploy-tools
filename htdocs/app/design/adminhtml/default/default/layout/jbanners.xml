@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<layout>
+
+	<banners_adminhtml_banner_index>
+		<reference name="head">
+			<action method="setTitle"><title>jBanners by Juno Web Design</title></action>
+		</reference>
+		<reference name="content">
+			<block type="banners/adminhtml_banner" name="jbanner"/>
+		</reference>
+	</banners_adminhtml_banner_index>
+	
+	<banners_adminhtml_banner_edit>
+		<reference name="head">
+			<action method="setTitle"><title>jBanners by Juno Web Design</title></action>
+		</reference>
+		<reference name="left">
+			<block type="banners/adminhtml_banner_edit_tabs" name="banner_edit_tabs"/>
+		</reference>
+		<reference name="content">
+			<block type="banners/adminhtml_banner_edit" name="banner_edit">
+				<block type="banners/adminhtml_banner_edit_form" name="form"/>
+			</block>
+		</reference>
+	</banners_adminhtml_banner_edit>
+	
+	<adminhtml_catalog_category_edit>
+		<reference name="tabs">
+			<action method="addTab">
+				<name>category_banners</name>
+				<block>banners/adminhtml_catalog_category_banner_grid</block>
+			</action>
+		</reference>
+	</adminhtml_catalog_category_edit>
+</layout>

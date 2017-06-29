@@ -1,0 +1,124 @@
+.mix_container {
+    margin:0;
+    position: relative;
+}
+.mix_container .price-box .regular-price .price {
+	color:#fff;
+}
+.mix_nav {
+	height: 74px;
+	position: absolute;
+	right: 0;
+	top: 75px;
+	width: 100%;
+	z-index:0;
+}
+.mix_wrapper .jcarousel-prev {
+	background: url("../images/scrollerNav.gif") no-repeat scroll left top transparent;
+	border: 0 none;
+	cursor: pointer;
+	display: block;
+	height:  24px;
+	position: absolute;
+	right:27px;
+	font-size:0px;
+	outline:none;
+	top: -45px;
+	width: 25px;
+	z-index: 1;
+	-moz-transition: all 400ms ease-in-out 0s;
+	-ms-transition: all 400ms ease-in-out 0s;
+	-o-transition: all 400ms ease-in-out 0s;
+	transition: all 400ms ease-in-out 0s;
+}
+.mix_wrapper .jcarousel-next {
+	background: url("../images/scrollerNav.gif") no-repeat scroll right top transparent;
+	border: 0 none;
+	cursor: pointer;
+	display: block;
+	height: 24px;
+	position: absolute;
+	right: 0;
+	outline:none;
+	font-size:0px;
+	top: -45px;
+	width: 25px;
+	z-index: 1;
+	-moz-transition: all 400ms ease-in-out 0s;
+	-ms-transition: all 400ms ease-in-out 0s;
+	-o-transition: all 400ms ease-in-out 0s;
+	transition: all 400ms ease-in-out 0s;
+}
+.mix_wrapper ul{padding:0px;}
+
+.mix_wrapper .jcarousel-prev.jcarousel-prev-disabled-horizontal {
+	background-position: left top;
+}
+/*.mix_wrapper .jcarousel-prev.jcarousel-prev-disabled-horizontal{background-color:#ccc;}
+
+.mix_wrapper .jcarousel-next.jcarousel-next-disabled-horizontal:hover{background-color:#ccc;}
+
+.mix_wrapper .jcarousel-next.jcarousel-next-disabled-horizontal{background-color:#ccc;}*/
+
+.mix_wrapper .jcarousel-next:hover {
+	background-position:right bottom;
+}
+.mix_wrapper .jcarousel-prev:hover {
+	background-position:left bottom;
+}
+.mix_nav span:hover {
+	opacity:1.0;
+}
+.mix_wrapper .jcarousel-clip {
+	overflow:hidden;
+}
+.mix_wrapper {
+	height:200px;
+	position:relative;
+	margin:0px auto;
+}
+.mix_wrapper ul li {
+	color: #FFFFFF;
+	float: left;
+	font-size: 16px;
+	font-weight: normal;
+	overflow: hidden;
+	padding:5px;
+	position: relative;
+	text-decoration: none;
+	text-transform: capitalize;
+}
+.mix_wrapper ul li a {
+	color: #FFFFFF;
+	display: block;
+	font: 13px/1.55 'Droid Sans', arial, helvetica, sans-serif;
+	outline: medium none;
+	text-align:center;
+}
+.mix_wrapper ul li a img {
+}
+.mix_wrapper ul li a img:hover {
+	opacity:1.0;
+}
+.mix_wrapper ul li a.product-image {
+	color: #FFFFFF;
+	display: block;
+	outline: medium none;
+	padding: 5px;
+	height:168px;
+	background:#fff;
+}
+.mix_wrapper button.button span {
+	box-shadow:none;
+}
+.outer.box{position:relative;}
+.ic_caption {
+    background: none repeat scroll 0 0 #000000;
+    height: 184px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 184px;
+}
+
+/* Specific style for the examples */

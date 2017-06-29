@@ -1,0 +1,15 @@
+.header .logo {
+	position:relative;
+	top:20px;
+}
+
+@media (max-width: 980px) {
+	.header .logo {
+		top:0;
+	}
+	.header #search_mini_form {
+		position:absolute;
+		right:0 !important; top:0 !important;
+		width:255px !important;
+	}
+}

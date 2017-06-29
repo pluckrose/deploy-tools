@@ -1,0 +1,143 @@
+
+.nosto-clearfix {
+    overflow: hidden;
+}
+
+.nosto-title {
+    padding: 10px 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.products-grid.nosto-grid {
+    width: 100%;
+}
+
+.nosto-grid li {
+    padding-bottom: 10px;
+}
+
+.nosto-grid .price {
+    float: left;
+    min-height: 66px;
+}
+
+.nosto-grid .special-price {
+    font-family: "open_sans_semiboldregular";
+    font-size: 20px;
+}
+
+.nosto-grid .old-price {
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+.nosto-grid.nosto-grid {
+    padding-left: 0;
+}
+
+.nosto-grid .item {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    list-style-type: none;
+    float: left;
+    width: 20%;
+    padding: 0 10px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.nosto-grid--category .item {
+    width: 25%;
+}
+
+.nosto-grid .amlabel-div {
+    float: none;
+}
+
+.nosto-grid .thumbnail {
+    height: auto !important; /* Yes, I'm using !important, live with it. */
+    padding: 0 0 10px !important;
+}
+
+.nosto-grid button.button {
+    right: 0;
+}
+
+@media (min-width: 901px) and (max-width: 1280px) {
+    .nosto-grid .item:last-child {
+        display: none;
+    }
+    .nosto-grid .item {
+        width: 25%;
+    }
+}
+@media (min-width: 768px) and (max-width: 900px) {
+    .nosto-grid .item:nth-child(4), .nosto-grid .item:last-child {
+        display: none;
+    }
+    .nosto-grid .item {
+        width: 33.333333%;
+    }
+}
+@media (max-width: 768px) {
+    .nosto-grid .item {
+        width: 33.333333%;
+    }
+}
+
+@media (max-width: 640px) {
+    .nosto-grid .item {
+        width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .nosto-grid .item {
+        float: none;
+        width: 100%;
+    }
+
+    .nosto-grid .product-name {
+        min-height: 50px;
+    }
+}
+
+.outer_bottom--nosto {
+    height: auto;
+}
+
+.nosto-img {
+    min-height: 155px;
+}
+
+.nosto-img img {
+    max-height: 155px;
+    width: auto;
+}
+
+.nosto-cart .price-box {
+    position: relative;
+    bottom: 10px;
+    float: left;
+}
+
+.nosto-cart button.button {
+    position: relative;
+}
+
+.product-shop .nosto-grid button.button span span{
+    padding: 0 30px;
+}
+#nosto-product-page .category-products{
+    border: 1px solid #cccccc;
+    margin-left: 0 !important;
+    padding: 5px;
+    width: 98%;
+    clear: both;
+    margin-top: 10px;
+    float: left;
+}
+.products-grid.nosto-grid .product-name a {
+    min-height: 81px;
+    display: block;
+}

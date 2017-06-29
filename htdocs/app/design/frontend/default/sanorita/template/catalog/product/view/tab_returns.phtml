@@ -1,0 +1,8 @@
+<?php
+    $page = Mage::getModel('cms/page')->load('returns');
+    $helper = Mage::helper('cms');
+	$processor = $helper->getPageTemplateProcessor();
+	$html = $processor->filter($page->getContent());
+?>
+<h2><?php echo $page->getTitle(); ?></h2>
+<?php echo $html ?>

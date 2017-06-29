@@ -1,0 +1,5 @@
+<?php
+    $page = Mage::getModel('cms/block')->load('why_not_try');
+?>
+<h2><?php echo $page->getTitle(); ?></h2>
+<?php echo $page ->getContent(); ?>

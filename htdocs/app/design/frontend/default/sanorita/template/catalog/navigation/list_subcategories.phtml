@@ -1,0 +1,51 @@
+<div class="subcat">
+<?php $_maincategorylisting=$this->getCurrentCategory()?>
+<?php $_categories=$this->getCurrentChildCategories()?>
+<?php if($_categories->count()):?>
+<? foreach ($_categories as $_category):?>
+<? if($_category->getIsActive()):
+$cur_category=Mage::getModel('catalog/category')->load($_category->getId());
+$layer = Mage::getSingleton('catalog/layer');
+$layer->setCurrentCategory($cur_category);
+$catName = $this->getCurrentCategory()->getName();
+if($_imageUrl=!$this->getCurrentCategory()->getImageUrl()):?>
+
+
+
+
+<div>
+	<div>
+	<a href="<?php echo $this->getCategoryUrl($_category)?>"><?php echo $catName ?></a>
+	</div>
+	<div>
+	<a href="<?php echo $this->getCategoryUrl($_category)?>"><img alt="category image" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/base/default/images/catalog/product/placeholder/small_image.jpg" /></a>
+	</div>
+
+</div>
+<? endif?>
+<? if($_imageUrl=$this->getCurrentCategory()->getImageUrl()):?>
+
+
+<div class="featured-cat-block">
+	<div class="featured-cat-content">
+		<div class="featured-cat">
+			<div class="cat-title">
+				<a href="<?php echo $this->getCategoryUrl($_category)?>"> <?php echo $_category->getName()?></a>
+			</div>
+			<div class="cat-image">		
+				<a href="<?php echo $this->getCategoryUrl($_category)?>"><img src="<?php echo $_imageUrl?>" alt="<?php echo $_category->getName()?>" /></a>
+			</div>
+			<div class="cat-text">
+			<a href="<?php echo $this->getCategoryUrl($_category)?>"> Take a Look</a>			
+			</div>	
+		</div>
+	</div>		
+</div>	
+<? endif;     endif; ?>
+<? endforeach ?>
+<?php /* This resets the category back to the original pages category
+****     If this is not done, subsequent calls on the same page will use the last category
+****    in the foreach loop         */   ?>
+<?php $layer->setCurrentCategory($_maincategorylisting);  ?>
+<? endif; ?>
+</div>

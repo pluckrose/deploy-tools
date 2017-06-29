@@ -1,0 +1,29 @@
+<?php 
+
+	echo $this->getSignupForm();
+	
+	echo $this->getShareButton();
+
+?>
+
+<style>
+.page-empty { padding: 0px; }
+
+#formcontainer { overflow: hidden; width: 800px; }
+#formcontainer #graphic { float: left; width: 440px; padding-right: 20px; }
+#formcontainer #form { float: left; width: 340px; }
+
+#formcontainer #form span { }
+#formcontainer #form p { font-size: 13pt; line-height: 16pt; font-weight: bold; }
+#formcontainer #form hr { height: 1px; color: #ccc; margin-bottom: 10px; }
+#formcontainer #form input { border: 1px solid #c6c6c6; padding: 5px 10px; width: 318px; margin: 10px 0; border-radius: 5px; }
+#formcontainer #form .submitbutton { width: 340px; text-indent: -99999px; background: url('/skin/frontend/base/default/images/enter-btn.png'); height: 40px; }
+#formcontainer a.rules { color: #1e7ec8; font-size: 9pt; }
+
+</style>
+
+<script type="text/javascript">
+//< ![CDATA[
+var customForm = new VarienForm('regform');
+//]]>
+</script>

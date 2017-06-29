@@ -1,0 +1,240 @@
+<?php
+/**
+ *
+ */
+?>
+<?php if ($banner = $this->getBanner()): ?>
+	<table cellspacing="0" width="100%" id="coord-pirate">
+		<tbody>
+			<tr>
+				<td>
+					<div id="banner-image-wrapper" >
+						<img src="<?php echo $banner->getImageUrl() ?>" id="banner-image" alt="<?php echo $banner->getTitle() ?>"/>
+					</div>
+					<button type="button" id="start-mapping" class="scalable add" style="float:left; "><span><?php echo $this->__('Enable Image Mapper') ?></span></button>
+				</td>
+				<td>
+					<div class="grid">
+						<table  id="coord-list" width="100%" style="display:none;">
+							<col width="30px"/>
+							<col />
+							<col />
+							<col width="20px"/>
+							<thead>
+								<tr class="headings">
+									<th><span class="nobr"><a href="#"><span>ID</span></a></span></th>
+									<th><span class="nobr"><a href="#"><span>URL</span></a></span></th>
+									<th><span class="nobr"><a href="#"><span>Title</span></a></span></th>
+									<th><span class="nobr"><a href="#"><span>&nbsp;</span></a></span></th>
+								</tr>
+							</thead>
+							<tbody id="coord-tbody">
+							</tbody>
+						</table>
+					</div>	
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<script type="text/javascript">
+	
+		var CoordPirate = Class.create({
+			initialize: function (imageId, gridId) {
+				this.image = $(imageId);
+				this.grid = $(gridId);
+				this.wrapper = $(imageId + '-wrapper');
+				this.initImageElements();
+				this.bindDragEvents();
+				this.idFactory = 1;
+				this.sX = 0;
+				this.sY = 0;
+				this.eX = 0;
+				this.eY = 0;
+			},
+			initImageElements: function() {
+				this.image.setStyle({position: 'absolute'});			
+				this.wrapper.setStyle({height: this.image.height + 'px'});
+				this.wrapper.setStyle({width: this.image.width + 'px'});
+				this.wrapper.up().setStyle({width: (this.image.width + 10) + 'px'});
+				this.wrapper.setStyle({position: 'relative'});
+				this.grid.setStyle('display:table;');
+			},
+			bindDragEvents: function() {
+				var my = this;
+				Event.observe(this.image, 'click', function(e) {
+
+					var shapeId = my.idFactory;
+					if (my.eX < my.sX && my.eY < my.sY) {
+						my.addCoords(my.eX, my.eY, (my.sX - my.eX), (my.sY - my.eY), shapeId);
+					}
+					else if (my.eX < my.sX ) {
+						my.addCoords(my.eX, my.sY, (my.sX - my.eX), (my.eY - my.sY), shapeId);
+					}
+					else if (my.eY < my.sY) {
+						my.addCoords(my.sX, my.eY, (my.eX - my.sX), (my.sY - my.eY), shapeId);
+					}
+					else {
+						my.addCoords(my.sX, my.sY, (my.eX - my.sX), (my.eY - my.sY), shapeId);
+					}
+
+					my.idFactory++;
+					Event.stop(e);
+				});
+
+				Event.observe(this.image, 'mousedown', function(e) {
+
+					my.sX = parseInt(Event.pointerX(e) - my.wrapper.offsetLeft);
+					my.sY = parseInt(Event.pointerY(e) - my.wrapper.offsetTop);
+					
+					
+					Event.stop(e);
+				});
+
+				Event.observe(this.image, 'mouseup', function(e) {
+					my.eX = parseInt(Event.pointerX(e) - my.wrapper.offsetLeft);
+					my.eY = parseInt(Event.pointerY(e) - my.wrapper.offsetTop);
+					
+					if (my.eX < 0) {
+						my.eX = 0;
+					}
+					
+					if (my.eY < 0) {
+						my.eY = 0;
+					}
+					
+					Event.stop(e);
+				});
+			},
+			addCoords: function(posLeft, posTop, width, height, divId, url, title) {
+				this.idFactory = (divId + 1);
+				new CoordPirateShape(this.wrapper.id, posLeft, posTop, width, height, divId, url, title);
+			}
+		});
+		
+		var CoordPirateShape = Class.create({
+			initialize: function(wrapperId, posLeft, posTop, width, height, divId, url, title) {
+				this.wrapper = $(wrapperId);
+				this.posLeft = posLeft;
+				this.posTop = posTop;
+				this.width = width;
+				this.height = height;
+				this.id = divId;
+				this.colours = new Array('red', 'white', 'black');
+				this.draw();
+
+				this.registerInGrid(url, title);
+			},
+			draw: function() {
+				var colourCode = this.colours[(this.id % this.colours.length)];
+
+				var dv = document.createElement('div');
+				
+				dv.id = 'coord-shape-' + this.id;
+				dv.innerHTML = '&nbsp;';
+				dv.style.backgroundColor = colourCode;
+				dv.style.height = this.height + 'px';
+				dv.style.left = this.posLeft + 'px';
+				dv.style.top = this.posTop + 'px';
+				dv.style.width = this.width + 'px';
+				dv.className = 'coord-shape';
+				this.wrapper.appendChild(dv);
+
+			},
+			registerInGrid: function(url, title) {
+				var my = this;
+				var tr = document.createElement('tr');
+				var td = new Array();
+				
+				td[0] = document.createElement('td');
+				td[0].innerHTML = this.id;
+				td[0].innerHTML += "<input type=\"hidden\" name=\"coord[" + this.id + "][left]\" value=\"" + this.posLeft + "\"\/>";
+				td[0].innerHTML += "<input type=\"hidden\" name=\"coord[" + this.id + "][top]\" value=\"" + this.posTop + "\"\/>";
+				td[0].innerHTML += "<input type=\"hidden\" name=\"coord[" + this.id + "][width]\" value=\"" + this.width + "\"\/>";
+				td[0].innerHTML += "<input type=\"hidden\" name=\"coord[" + this.id + "][height]\" value=\"" + this.height + "\"\/>";
+				td[0].align = 'right';
+				
+				if (url == undefined) {
+					url = '';
+				}
+				
+				td[1] = document.createElement('td');
+				td[1].innerHTML = "<input type=\"text\" name=\"coord[" + this.id + "][url]\" value=\"" + url+ "\" class=\"input-text\"\/>";
+				
+				if (title == undefined) {
+					title = '';
+				}
+				
+				td[2] = document.createElement('td');
+				td[2].innerHTML = "<input type=\"text\" name=\"coord[" + this.id + "][title]\" value=\"" + title+ "\" class=\"input-text\"\/>";
+				
+				td[3] = document.createElement('td');
+				td[3].innerHTML = "<button type=\"button\" class=\"delete scalable\" id=\"remove-coord-" + this.id + "\"><span>&nbsp;<\/span><\/button>";
+				
+				tr.id = 'coord-grid-' + this.id;
+				tr.appendChild(td[0]);
+				tr.appendChild(td[1]);
+				tr.appendChild(td[2]);
+				tr.appendChild(td[3]);
+
+				$('coord-tbody').appendChild(tr);
+				
+				decorateTable('coord-list');
+				
+				Event.observe($('remove-coord-' + this.id), 'click', function(e) {
+					var toRemove = new Array('coord-shape-' + my.id, 'coord-grid-' + my.id);
+					
+					toRemove.each(function(elem) {
+						try {
+							new Effect.Fade(elem, {duration: 0.8, from:.3, to:0, afterFinish: function() {
+								var input = document.createElement("input");
+									input.setAttribute("type", "hidden");
+									input.setAttribute("name", "coord[" + this.id + "][remove]");
+									input.setAttribute("value",'remove');
+									$('coord-tbody').appendChild(input);
+								$(elem).remove();
+							}});
+						}
+						catch (e) {}
+					});
+				
+					Event.stop(e);
+				});
+				
+				Event.observe($('coord-grid-' + this.id), 'mouseover', function(e) {
+					$('coord-shape-' + my.id).setStyle('filter:alpha(opacity=80); opacity:.8');
+				});
+				
+				Event.observe($('coord-grid-' + this.id), 'mouseout', function(e) {
+					$('coord-shape-' + my.id).setStyle('filter:alpha(opacity=30); opacity:.3');
+				});
+			}
+		});
+		
+		Event.observe($('start-mapping'), 'click', function(e) {
+			Effect.Fade($('start-mapping'), {duration:1.0,from:1.0,to:0.0});
+
+			var myCoordPirate = new CoordPirate('banner-image', 'coord-list');
+		
+			<?php if ($coords = $this->getCoords()): ?>
+				<?php foreach($coords as $coordId => $coord): ?>
+					myCoordPirate.addCoords(<?php echo $coord['left'] ?>, <?php echo $coord['top'] ?>, <?php echo $coord['width'] ?>, <?php echo $coord['height'] ?>, <?php echo $coordId ?>, '<?php echo $coord['url'] ?>', '<?php echo $coord['title'] ?>');
+				<?php endforeach; ?>
+			<?php endif; ?>
+		});
+
+	</script>
+	<style>
+		
+		#coord-pirate .input-text {
+			background-color:transparent;
+			border-width:0px;
+			width:98%;
+		}
+		
+		#coord-pirate .grid table td { border-width:1px; }
+		#coord-pirate .grid button.delete { padding-right:1px; }
+		#coord-pirate .coord-shape { border:1px solid #000; display:block; filter:alpha(opacity=30); opacity: .3; position: absolute; }
+	</style>
+<?php endif; ?>

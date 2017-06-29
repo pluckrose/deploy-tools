@@ -1,0 +1,46 @@
+<?php $_product = $this->getProduct(); ?>
+<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?> 
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if($_product->isSaleable() and $_product->getAttributeText('in_store_only') != "Yes"): ?>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('Qty:') ?></label>
+        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+        
+<!--
+        <select name="Qty" class="input-text qty" id="qty"> 
+            <option value="1" selected>1</option> 
+            <option value="2">2</option>
+            <option value="3">3</option> 
+            <option value="4">4</option> 
+            <option value="5">5</option> 
+        </select>
+-->
+
+        
+    <!--     if inventory stock is enabled then can use -->
+
+<?php /*
+                <select name="Qty">
+  <?php $i = 1 ?>
+  <?php do { ?>
+    <option value="<?php echo $i?>">
+      <?php echo $i?>
+      <?php $i++ ?>
+    </option>
+    <?php } while ($i <= (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getQty()) ?>
+*/ ?>
+
+</select>
+
+        
+        <?php endif; ?>
+        
+        
+        
+    </div>
+   <div class="prodbut"><button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button> 
+   <a href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><?php echo $this->__('+Add to Wishlist') ?></a>
+   </div>
+        <?php echo $this->getChildHtml('', true, true) ?> 
+<?php endif; ?>

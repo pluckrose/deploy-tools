@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ECS_CmsPicker>
+            <version>0.1.0</version>
+        </ECS_CmsPicker>
+    </modules>
+    <global>
+        <models>
+            <ecs_cmspicker>
+                <class>ECS_CmsPicker_Model</class>
+                <resourceModel>ecs_cmspicker_resource</resourceModel>
+            </ecs_cmspicker>
+        </models>
+        <blocks>
+            <ecs_cmspicker>
+                <class>ECS_CmsPicker_Block</class>
+            </ecs_cmspicker>
+        </blocks>
+        <helpers>
+            <ecs_cmspicker>
+                <class>ECS_CmsPicker_Helper</class>
+            </ecs_cmspicker>
+        </helpers>
+        <resources>
+            <cmspicker_setup>
+                <setup>
+                    <module>ECS_CmsPicker</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </cmspicker_setup>
+        </resources>
+    </global>
+</config>

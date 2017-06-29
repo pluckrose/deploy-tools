@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<layout>
+
+	<default>
+		<reference name="head">
+			<action method="addJs"><script>prototype/carousel/carousel.js</script></action>
+			<!--<action method="addCss"><stylesheet>css/jbanners.css</stylesheet></action>-->
+		</reference>
+	</default>
+	
+	<cms_index_index>
+		<reference name="head">
+			<action method="addJs"><script>juno/banner/class.horinaja.scriptaculous.js</script></action>
+			<!--<action method="addCss"><stylesheet>css/horinaja.css</stylesheet></action>-->
+		</reference>
+	</cms_index_index>
+
+	<catalog_category_default>
+		<reference name="head">
+			<action method="addJs"><script>juno/banner/class.horinaja.scriptaculous.js</script></action>
+			<action method="addCss"><stylesheet>css/horinaja.css</stylesheet></action>
+		</reference>
+	</catalog_category_default>
+	
+	<catalog_category_layered>
+		<reference name="head">
+			<action method="addJs"><script>juno/banner/class.horinaja.scriptaculous.js</script></action>
+			<action method="addCss"><stylesheet>css/horinaja.css</stylesheet></action>
+		</reference>
+	</catalog_category_layered>
+</layout>

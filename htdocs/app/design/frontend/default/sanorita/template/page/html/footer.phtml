@@ -1,0 +1,146 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_modern
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('bottom-banners')->toHtml() ?>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('facebook-bottom')->toHtml() ?>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('twitter-bottom')->toHtml() ?>
+<div class="footer-container span12">
+  <div class="footer">
+
+    <div class="footer_top">
+        <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('free_shipping')->toHtml() ?>
+        <?php echo $this->getChildHtml('footer_newsletter') ?>
+	</div>
+
+    <div class="footer_bottom">
+      <div class="link_box">
+	  	  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('HomePageBlog')->toHtml() ?>
+		  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('oaktree-footer-menu')->toHtml() ?>
+		  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('getintouch-footer')->toHtml() ?>
+	          <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer-trustpilot')->toHtml() ?>
+		  
+      </div>
+      
+    <div class="clear"></div>
+  </div>
+</div>
+<div id="back-top" class="goTop"><a rel="tooltip" title="<?php echo $this->__('Back To Top')?>" data-placement="left" href="javascript:void(0);">BackTop</a></div>
+<div class="copyright"><?php echo $this->getCopyright() ?><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('social')->toHtml() ?><img src="<?php echo $this->getSkinUrl('images/cards.png') ?>"/> </div>
+
+<?php //if(Mage::getSingleton('cms/page')->getIdentifier() == 'home'  && Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms') : ?>
+<a href="#popup-home-call" id="popup-home-link"></a>
+<div style="display:none">
+  <div class="popup-home" id="popup-home-call">
+  	<button class="close"><span>Close</span></button>
+  	<img style="clear: both;" src="<?php echo $this->getSkinUrl('images/text-popup.jpg') ?>"/>
+  	<a class="link-fb" href="https://www.facebook.com/oaktreegardencentre/app_208195102528120">Click FB</a>
+  	<img src="<?php echo $this->getSkinUrl('images/cla-e210.jpg') ?>"/>
+  </div>
+</div>
+
+<!-- Removed Jquery 1.9.1 as it was looking in the root of the site so would never be used.... -->
+
+<script type="text/javascript" src="<?php echo $this->getJsUrl('jquery.cookie.js') ?>"></script>
+		<script>
+			/*jQuery(document).ready(function() {
+				if(jQuery('body').hasClass('cms-home')){
+					var data = jQuery.cookie("homepopup");
+					if(data != '1'){
+						jQuery('#popup-home-link').fancybox();
+						jQuery('#popup-home-link').trigger('click');
+						jQuery.cookie("homepopup", "1");
+					}
+				}	
+			});*/
+		</script>
+		
+<?php //endif; ?>
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/responsive.css')?>" media="screen" />
+<![endif]-->
+
+
+<script type="text/javascript" src="https://www.oaktreegardencentre.com/ResponsiveSlides/responsiveslides.js"></script>
+<script type="text/javascript">// <![CDATA[
+var j = jQuery.noConflict();
+j(document).ready(function() {
+   j(".rslides").responsiveSlides({
+  auto: true,             // Boolean: Animate automatically, true or false
+  speed: 2000,            // Integer: Speed of the transition, in milliseconds
+  timeout: 5500,          // Integer: Time between slide transitions, in milliseconds
+  pager: true,           // Boolean: Show pager, true or false
+  nav: false,             // Boolean: Show navigation, true or false
+  random: false,          // Boolean: Randomize the order of the slides, true or false
+  pause: false,           // Boolean: Pause on hover, true or false
+  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+  prevText: "Previous",   // String: Text for the "previous" button
+  nextText: "Next",       // String: Text for the "next" button
+  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+  manualControls: "",     // Selector: Declare custom pager navigation
+  namespace: "rslides",   // String: Change the default namespace used
+  before: function(){},   // Function: Before callback
+  after: function(){}     // Function: After callback
+});
+  });
+// ]]></script>
+<script type="text/javascript">// <![CDATA[
+var j = jQuery.noConflict();
+j(document).ready(function(){   
+    j('.example2').hide().before('<a href="#" id="toggle-example2" class="button">&nbsp;</a>');
+    j('a#toggle-example2').click(function() {
+        j('.example2').slideToggle(1000);
+        return false;
+    });
+});
+// ]]></script>
+<script type="text/javascript" language="javascript" src="https://www.oaktreegardencentre.com/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script type="text/javascript">
+var k = jQuery.noConflict();
+k(document).ready(function(){ 
+  k(".more-views ul").carouFredSel({
+      direction: "up",
+      circular: true,
+      width: 70,
+      height: 360,
+      items: {
+          start: 1,
+          width: 70,
+          height: 60
+      },
+      scroll: 1,
+      auto: true,
+      prev : {
+button : ".prev",
+key : "left"
+},
+next : {
+button : ".next",
+key : "right"
+}
+  });
+  });
+  </script>

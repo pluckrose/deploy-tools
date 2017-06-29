@@ -1,0 +1,26 @@
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="fieldset-legend head-shipping-method icon-head"><?php echo $this->__(Mage::helper('deliverynote')->getFrontendLabel()) ?></h4>
+    </div>
+    <div class="fieldset">
+        <div id="order-deliverynote">
+            <textarea style="width:98%; height:8em;" id="deliverynote-note" name="order[delivery_note]" rows="2"
+                      cols="15"><?php echo $this->__($this->getNote()) ?></textarea>
+        </div>
+        <script type="text/javascript">
+            AdminOrder.addMethods({
+                deliverynoteFieldsBind:function (container) {
+                    if ($(container)) {
+                        var fields = $(container).select('textarea');
+                        for (var i = 0; i < fields.length; i++)
+                            fields[i].observe('change', this.deliverynoteFieldChange.bind(this))
+                    }
+                },
+                deliverynoteFieldChange:function () {
+                    this.saveData(this.serializeData('order-deliverynote'));
+                }
+            });
+            order.deliverynoteFieldsBind('order-deliverynote');
+        </script>
+    </div>
+</div>

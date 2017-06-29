@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Juno_HoneyTrap>
+            <version>0.0.1</version>
+        </Juno_HoneyTrap>
+    </modules>
+    <global>
+        <fieldsets>
+            <customer_account>
+                <HoneyTrap><create>1</create><update>1</update></HoneyTrap>
+            </customer_account>
+        </fieldsets>
+        <models>
+            <Juno_HoneyTrap>
+                <class>Juno_HoneyTrap_Model</class>
+            </Juno_HoneyTrap>
+        </models>
+        <events>
+            <!-- Contacts Form -->
+            <controller_action_predispatch_contacts_index_post>
+                <observers>
+                    <honeytrap>
+                        <type>singleton</type>
+                        <class>Juno_HoneyTrap_Model_Observer</class>
+                        <method>checkTrap</method>
+                    </honeytrap>
+                </observers>
+            </controller_action_predispatch_contacts_index_post>
+            <!-- Create Account Form -->
+            <controller_action_predispatch_customer_account_createpost>
+                <observers>
+                    <honeytrap>
+                        <type>singleton</type>
+                        <class>Juno_HoneyTrap_Model_Observer</class>
+                        <method>checkTrap</method>
+                    </honeytrap>
+                </observers>
+            </controller_action_predispatch_customer_account_createpost>
+            <!-- Review Product Form -->
+            <controller_action_predispatch_review_product_post>
+                <observers>
+                    <honeytrap>
+                        <type>singleton</type>
+                        <class>Juno_HoneyTrap_Model_Observer</class>
+                        <method>checkTrap</method>
+                    </honeytrap>
+                </observers>
+            </controller_action_predispatch_review_product_post>
+            <!-- newsletter subcription form -->
+            <controller_action_predispatch_newsletter_subscriber_new>
+                <observers>
+                    <honeytrap>
+                        <type>singleton</type>
+                        <class>Juno_HoneyTrap_Model_Observer</class>
+                        <method>checkTrap</method>
+                    </honeytrap>
+                </observers>
+            </controller_action_predispatch_newsletter_subscriber_new>
+            <!-- Email product to friend -->
+            <controller_action_predispatch_sendfriend>
+                <observers>
+                    <honeytrap>
+                        <type>singleton</type>
+                        <class>Juno_HoneyTrap_Model_Observer</class>
+                        <method>checkTrap</method>
+                    </honeytrap>
+                </observers>
+            </controller_action_predispatch_sendfriend>
+        </events>
+    </global>
+</config>

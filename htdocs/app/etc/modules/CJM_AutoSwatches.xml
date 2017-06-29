@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <CJM_AutoSwatches>
+            <active>true</active>
+            <codePool>local</codePool>
+        </CJM_AutoSwatches>
+    </modules>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ECS_OaktreePdf>
+            <active>true</active>
+            <codePool>local</codePool>
+        </ECS_OaktreePdf>
+    </modules>
+</config>

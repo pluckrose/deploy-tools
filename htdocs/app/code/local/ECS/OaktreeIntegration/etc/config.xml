@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <ECS_OaktreeIntegration>
+            <version>0.0.1</version>
+        </ECS_OaktreeIntegration>
+    </modules>
+    <global>
+        <helpers>
+            <oaktreeintegration>
+                <class>ECS_OaktreeIntegration_Helper</class>
+            </oaktreeintegration>
+        </helpers>
+        <models>
+            <oaktreeintegration>
+                <class>ECS_OaktreeIntegration_Model</class>
+                <resourceModel>oaktreeintegration_resource</resourceModel>
+            </oaktreeintegration>
+            <oaktreeintegration_resource>
+                <class>ECS_OaktreeIntegration_Model_Resource</class>
+            </oaktreeintegration_resource>
+        </models>
+        <resources>
+            <oaktreeintegration_setup>
+                <setup>
+                    <module>ECS_OaktreeIntegration</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+            </oaktreeintegration_setup>
+        </resources>
+    </global>
+
+    <crontab>
+        <jobs>
+            <oaktreeintegration_import_products>
+                <schedule>
+                    <cron_expr>*/10 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>oaktreeintegration/import_product::import</model>
+                </run>
+            </oaktreeintegration_import_products>
+        </jobs>
+    </crontab>
+</config>

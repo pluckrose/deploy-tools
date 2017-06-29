@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+	<PRODUCT_TYPE_configurable translate="label" module="catalog">
+        <reference name="product.info.options.configurable"><action method="setTemplate"><template>autoswatches/catalog/product/view/type/options/configurable.phtml</template></action></reference>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/swatches.css</stylesheet><params>media="all"</params></action>
+			<action method="addJs"><script>cjm/autoswatches/colorselected.js</script></action>
+		</reference>
+	</PRODUCT_TYPE_configurable>
+</layout>

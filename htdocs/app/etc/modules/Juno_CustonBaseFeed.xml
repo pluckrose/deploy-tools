@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Juno_CustonBaseFeed>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <RocketWeb_GoogleBaseFeedGenerator/>
+
+            </depends>
+        </Juno_CustonBaseFeed>
+    </modules>
+</config>

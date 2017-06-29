@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addJs"><script>jquery/modernizr.min.js</script></action>
+            <action method="addItem"><type>skin_css</type><name>css/nosto.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/nosto.js</name><params/></action>
+        </reference>
+    </default>
+ <sendfriend_product_send translate="label">
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+ </sendfriend_product_send>
+<wishlist_index_configure translate="label">
+		 <reference name="head">
+			<action method="removeItem"><type>skin_js</type><name>js/mdl/ajax_cart.js</name></action>
+        </reference>
+		<reference name="content">
+			<remove name="mdlajaxcheckout"/>
+		</reference>
+        <reference name="product.info.options.wrapper.bottom">
+            <action method="unsetChild"><name>product.info.addto</name></action>
+        </reference>
+</wishlist_index_configure>
+<catalogsearch_result_index translate="label">
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+</catalogsearch_result_index>
+
+<cms_index_index translate="label">
+      <reference name="head">
+		 <action method="addItem"><type>skin_js</type><name>js/jquery.flexslider.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/light_box.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/lightmini.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/jquery.mousewheel.min.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/jquery.touchSwipe.min.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/jquery.carouFredSel-6.1.0-packed.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/jquery.hoverdir.js</name><params/></action>
+		 <action method="addCss"><stylesheet>css/mix.css</stylesheet></action>
+         <action method="addCss"><stylesheet>css/slideFrom.css</stylesheet></action>
+         <action method="addCss"><stylesheet>css/flexslider.css</stylesheet></action>
+         <action method="addCss"><stylesheet>css/light_box.css</stylesheet></action>
+  	  </reference>
+      <reference name="content">
+			<block type="core/template" name="featured.categories" after="-" template="page/html/home.categories.phtml">
+                <block type="cms/block" name="categories">
+    			  <action method="setBlockId"><block_id>featured_cats</block_id></action>
+    			</block>
+			</block>
+      </reference>
+      <update handle="MAP_popup" />
+</cms_index_index>
+
+<catalog_product_view>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>js/jquery.jcarousel.min.js</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>js/light_box.js</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>js/mdl/ajax_cart.js</name></action>
+			<action method="addCss"><stylesheet>css/skin.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/light_box.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/mdl/ajax_cart.css</stylesheet></action>
+            <action method="addJs"><script>productOptions.js</script></action>
+  	  </reference>
+		<reference name="product.info">
+			<block type="catalog/product_view_tabs" name="product.info.tabs" as="info_tabs" template="catalog/product/view/tabs.phtml" >
+				<action method="addTab" translate="title" module="catalog"><alias>description</alias><title>Detail</title><block>catalog/product_view_description</block><template>catalog/product/view/description.phtml</template></action>
+				<action method="addTab" translate="title" module="catalog"><alias>additional</alias><title>More Info</title><block>catalog/product_view_attributes</block><template>catalog/product/view/attributes.phtml</template></action>
+				<action method="addTab" translate="title" module="catalog"><alias>tabreviews</alias><title>Reviews</title><block>review/product_view_list</block><template>review/product/view/list.phtml</template></action>
+                <action method="addTab" translate="title" module="catalog"><alias>delivery</alias><title>Delivery</title><block>core/template</block><template>catalog/product/view/tab_delivery.phtml</template></action>
+                <action method="addTab" translate="title" module="catalog"><alias>returns</alias><title>Returns</title><block>core/template</block><template>catalog/product/view/tab_returns.phtml</template></action>
+                <action method="addTab" translate="title" module="catalog"><alias>touch</alias><title>Try It</title><block>core/template</block><template>catalog/product/view/tab_touch.phtml</template></action>
+                <action method="addTab" translate="title" module="catalog"><alias>pbfselector</alias><title>Finance Options</title><block>paybyfinance/selector</block><template>paybyfinance/selector-product.phtml</template></action>
+            </block>
+		</reference>
+		<reference name="tabreviews">
+			<block type="review/form" name="product.review.form" as="review_form">
+				<block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+					<label>Review Form Fields Before</label>
+					<action method="setMayBeInvisible"><value>1</value></action>
+				</block>
+			</block>
+        </reference>
+        <!--<reference name="content">-->
+                <!--<block type="paybyfinance/selector" name="paybyfinance.selector" as="pbfselector" template="paybyfinance/selector.phtml"></block>-->
+        <!--</reference>-->
+	</catalog_product_view>
+
+	 <default>
+        <!-- Mage_Poll -->
+        <reference name="left">
+            <block type="poll/activePoll" name="right.poll">
+                <action method="setPollTemplate"><template>poll/active.phtml</template><type>poll</type></action>
+                <action method="setPollTemplate"><template>poll/result.phtml</template><type>results</type></action>
+            </block>
+			 <remove name="right.reports.product.viewed"/>
+        </reference>
+		<reference name="header">
+            <block type="directory/currency" name="currency" template="directory/currency.phtml"/>
+        </reference>
+        <reference name="top.links">
+            <action method="addLink" translate="label title">
+                <label>Contact Us</label><url>/contactus</url><title>Contact Us</title>
+                <prepare/><urlParams/><position>1</position>
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>init.js</script></action>
+            <action method="addJs"><script>eqHeight.js</script></action>
+        </reference>
+    </default>
+
+	<catalog_category_default>
+        <update handle="SHORTCUT_popup" />
+        <reference name="left">
+            <block type="paypal/logo" name="paypal.partner.right.logo" template="paypal/partner/logo.phtml"/>
+        </reference>
+		<reference name="head">
+		 <action method="addItem"><type>skin_js</type><name>js/light_box.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/lightmini.js</name><params/></action>
+		 <action method="addCss"><stylesheet>css/light_box.css</stylesheet></action>
+  	  </reference>
+    </catalog_category_default>
+
+
+
+    <catalog_category_layered>
+        <update handle="SHORTCUT_popup" />
+        <reference name="left">
+            <block type="paypal/logo" name="paypal.partner.right.logo" template="paypal/partner/logo.phtml"/>
+        </reference>
+		<reference name="head">
+		 <action method="addItem"><type>skin_js</type><name>js/light_box.js</name><params/></action>
+		 <action method="addItem"><type>skin_js</type><name>js/lightmini.js</name><params/></action>
+		 <action method="addCss"><stylesheet>css/light_box.css</stylesheet></action>
+  	  </reference>
+    </catalog_category_layered>
+
+	 <cms_page translate="label">
+		 <reference name="left">
+			<block type="cms/block" after="-" name="home-page-block">
+			  <action method="setBlockId"><block_id>left_promo</block_id></action>
+			</block>
+        </reference>
+    </cms_page>
+
+</layout>
+

@@ -1,0 +1,106 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_modern
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+
+<div class="block block-related span12">
+   <div class="block-content">
+     <?php // Grid Mode ?>
+    <?php $_collectionSize = $_productCollection->count(4) ?>
+    <?php $_columnCount = $this->getColumnCount(); ?>
+		<?php $_iterator = 0; ?>
+		<ul class="relatedPan" id="block-related">
+		<?php $i=0; foreach ($_productCollection as $_product): ?>
+            
+            <li class="span2">
+            <div class="image_rotate">
+                <div class="amlabel-div">
+                     <div class="badge">            
+                        <?php if($_product->getData('new')){echo '<span class="new">'. $_product->getAttributeText('new').'</span>';  }?>
+                        <?php if($_product->getData('sale')){echo '<span class="sale">'. $_product->getAttributeText('sale').'</span>';  }?>
+                    </div> 
+                    <?php echo Mage::helper('amlabel')->getLabels($_product) ?>
+                    <a href="<?php echo $_product->getProductUrl() ?>" class="product-image" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(160); ?>" width="160" height="160" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a></div>
+                </div>
+                <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h3>
+                <!-- bundled price -->
+                    <?php if($_product->getTypeId() === Mage_Catalog_Model_Product_Type::TYPE_BUNDLE && $_product->getBundleDisplayPrice()): ?>
+                        <?php $bundleDisplayPrice = $_product->getBundleDisplayPrice(); ?>
+						<?php $bundleDisplaySaleSaving     = $_product->getBundleDisplaySaleSaving(); ?>
+                        <?php if($_product->getBundleDisplaySalePrice() > 0): ?>
+                            <?php $bundleDisplaySalePrice = $_product->getBundleDisplaySalePrice(); ?>
+                            <div class="price-box">
+                                <p class="old-price">
+                                    <span class="price"><?php echo Mage::helper('core')->currency($bundleDisplayPrice, true, false); ?></span>
+                                </p>
+								<?php if($_product->getBundleDisplaySaleSaving() > 0): ?>
+								<?php $bundleDisplaySaleSaving = $_product->getBundleDisplaySaleSaving(); ?>
+								<p class="old-price">
+									 <span class="regular-price">Save: <?php echo Mage::helper('core')->currency($bundleDisplaySaleSaving, true, false); ?></span>
+								</p>
+								<?php endif; ?>
+                                <p class="special-price">
+                                    <span class="price"><?php echo Mage::helper('core')->currency($bundleDisplaySalePrice, true, false); ?></span>
+                                </p>
+                            </div>
+                        <?php else: ?>
+                            <div class="price-box">
+                                    <span class="regular-price">
+                                        <span class="price"><?php echo Mage::helper('core')->currency($bundleDisplayPrice, true, false); ?></span>
+                                    </span>
+                            </div>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php echo $this->getPriceHtml($_product, true) ?>
+                    <?php endif; ?>
+                      <!-- / bundled price -->
+
+                <?php if($_product->getAttributeText('in_store_only') != "Yes"): ?>    
+                <div class="addbut">
+	                <a href="<?php echo $_product->getProductUrl() ?>">
+		                <span>Add</span>
+	                </a>
+                </div>
+                <?php endif ?>
+             </li>  
+		<?php endforeach ?>
+		</ul>
+   </div>
+</div>
+<?php endif; ?>

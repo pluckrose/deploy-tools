@@ -1,0 +1,5 @@
+<?php
+    $page = Mage::getModel('cms/page')->load('delivery');
+?>
+<h2><?php echo $page->getTitle(); ?></h2>
+<?php echo $page ->getContent(); ?>

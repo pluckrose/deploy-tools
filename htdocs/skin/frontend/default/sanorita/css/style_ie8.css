@@ -1,0 +1,97 @@
+.page, .header { width: 980px !important; }
+.span12 {
+    margin: 0 !important;
+    width: 1030px !important;
+}
+
+.bottom-banner a {
+float: left;
+margin-left: 5px;
+}
+
+.nav_bottom .clickable {
+float: left;
+}
+
+.main-container {
+clear: both;
+}	
+
+div.link_box div.menu {
+width: 200px !important;
+}
+
+.getintouch {
+width: 215px !important;
+}
+
+.menu2 {
+width: 200px !important;
+}
+
+.nav-container {
+z-index: 9999 !important;
+}
+
+#nav li ul {
+z-index: 9999 !important;
+
+}
+
+#nav a {
+padding: 8px 12px !important;
+}
+
+#tabcontent, .homeslider, .main, .col-main, .main-container {
+z-index: 9 !important;
+position: relative;
+}
+
+.sidebar {
+width: 150px !important;
+}
+
+
+.addbut a span {
+    background: #84B21F !important;
+    padding: 5px;
+}
+
+a#toggle-example2 {
+    margin-left: 30px;
+}
+
+.span9 {
+    width: 800px !important;
+}
+
+.span12 {
+    width: 980px !important;
+}
+
+
+.products-grid .span4.item {
+    width: 185px !important;
+}
+
+table.top-left tr td {
+    background-size: 80px 80px !important;
+    background-position: 0px 20px !important;
+}
+
+.header #search_mini_form {
+    left: 390px;
+}
+
+.new {
+	background: url("../images/new-badge-ie8.png") no-repeat scroll left top transparent !important;
+}
+.sale {
+	background:url("../images/badge-ie8.png") no-repeat scroll right top transparent !important;
+}
+
+a#toggle-example2 {
+	margin-left:0 !important;
+	background-position-x:-100px !important;
+}
+
