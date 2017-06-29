@@ -1,0 +1,10 @@
+{
+    "name": "ryanpluckrose/deploy-tools",
+    "authors": [
+        {
+            "name": "Ryan Pluckrose",
+            "email": "pluckjar@gmail.com"
+        }
+    ],
+    "require": {}
+}
